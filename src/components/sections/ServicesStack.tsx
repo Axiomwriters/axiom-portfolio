@@ -48,7 +48,7 @@ export default function ServicesStack() {
       className="services-container px-6 py-20 max-w-5xl mx-auto relative"
     >
       <h2 className="text-sm font-mono tracking-widest text-[#50cc60] uppercase mb-12">
-        The Remedy // Service Suite
+        {"The Remedy // Service Suite"}
       </h2>
 
       <div
