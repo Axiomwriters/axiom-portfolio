@@ -33,9 +33,15 @@ export default function ServicesStack() {
           },
         });
 
-        tl.to(cards[1], { yPercent: 0, ease: "power2.out" }, 0);
-        if (cards[2]) {
-          tl.to(cards[2], { yPercent: 0, ease: "power2.out" }, 0.5);
+        const secondCard = cards[1];
+        const thirdCard = cards[2];
+
+        if (secondCard) {
+          tl.to(secondCard, { yPercent: 0, ease: "power2.out" }, 0);
+        }
+
+        if (thirdCard) {
+          tl.to(thirdCard, { yPercent: 0, ease: "power2.out" }, 0.5);
         }
       });
     },
