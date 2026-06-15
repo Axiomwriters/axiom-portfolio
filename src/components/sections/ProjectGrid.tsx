@@ -56,7 +56,7 @@ export default function ProjectGrid() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
         <div>
           <h2 className="text-sm font-mono tracking-widest text-[#50cc60] uppercase mb-2">
-            // Project Ledger
+            {"// Project Ledger"}
           </h2>
           <p className="text-3xl font-bold tracking-tight">
             Active builds and upcoming systems
