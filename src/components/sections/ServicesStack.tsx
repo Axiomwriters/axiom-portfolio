@@ -18,33 +18,25 @@ export default function ServicesStack() {
 
       mm.add("(min-width: 769px)", () => {
         const cards = gsap.utils.toArray<HTMLElement>(".service-card");
+        if (cards.length < 2) return;
 
-        cards.forEach((card, index) => {
-          if (index === cards.length - 1) return;
+        gsap.set(cards.slice(1), { yPercent: 100 });
 
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top 10%",
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".services-container",
+            start: "top top",
+            end: "+=200%",
             pin: true,
-            pinSpacing: false,
-            endTrigger: ".services-container",
-            end: "bottom bottom",
+            scrub: 1,
             invalidateOnRefresh: true,
-          });
+          },
         });
 
-        cards.forEach((card) => {
-          gsap.from(card, {
-            yPercent: 20,
-            opacity: 0.5,
-            scrollTrigger: {
-              trigger: card,
-              start: "top 75%",
-              end: "top 25%",
-              scrub: 1,
-            },
-          });
-        });
+        tl.to(cards[1], { yPercent: 0, ease: "power2.out" }, 0);
+        if (cards[2]) {
+          tl.to(cards[2], { yPercent: 0, ease: "power2.out" }, 0.5);
+        }
       });
     },
     { scope: containerRef }
@@ -53,15 +45,26 @@ export default function ServicesStack() {
   return (
     <section
       ref={containerRef}
-      className="services-container px-6 py-20 max-w-5xl mx-auto relative space-y-24"
+      className="services-container px-6 py-20 max-w-5xl mx-auto relative"
     >
       <h2 className="text-sm font-mono tracking-widest text-[#50cc60] uppercase mb-12">
         The Remedy // Service Suite
       </h2>
 
-      {services.map((service) => (
-        <ServiceCard key={service.index} service={service} />
-      ))}
+      <div
+        className="services-deck space-y-24 md:grid md:grid-cols-1 md:gap-0 md:space-y-0 md:overflow-hidden"
+        style={{ gridTemplateAreas: '"s"' }}
+      >
+        {services.map((service) => (
+          <div
+            key={service.index}
+            className="service-card"
+            style={{ gridArea: "s" }}
+          >
+            <ServiceCard service={service} />
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
